@@ -26,7 +26,8 @@ const Upload = async (pathToFile, uniquePath, token) => {
           firebaseStorageDownloadTokens: token,
         },
       },
-    });
+    })
+  
   return (
     "https://firebasestorage.googleapis.com/v0/b/" +
     "govid-faa37.appspot.com" +
