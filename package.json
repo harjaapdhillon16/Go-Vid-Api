@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "@google-cloud/storage": "^5.1.2",
     "busboy": "^0.3.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "ffmpeg-installer": "^1.0.2",
     "firebase-admin": "^8.13.0",
+    "fluent-ffmpeg": "^2.1.2",
     "nodemon": "^2.0.4",
     "uuid-v4": "^0.1.0"
   }

@@ -11,7 +11,7 @@ HomeFeed.get("/homeFeed", async (req, res) => {
   let latest = [],
     popular = [],
     dataToBeSent = [];
-  await db.limitToLast(2).once("value", (snap) => {
+  await db.once("value", (snap) => {
     snap.forEach((data) => {
       let LatestData = {};
       LatestData.uid = data.val().uid;
@@ -24,12 +24,13 @@ HomeFeed.get("/homeFeed", async (req, res) => {
       .child(`${item.uid}/${item.postNo}`)
       .once("value", async (snapshot) => {
         let data = snapshot.val();
-        await userDb
-          .child(`${item.uid}/uri`)
-          .once("value", (snap) => (data.uri = snap.val()));
-        data.uid = item.uid;
-        dataToBeSent.push(data);
-        if (index === 0) {
+        await userDb.child(`${item.uid}/uri`).once("value", (snap) => {
+          data.uri = snap.val();
+          data.uid = item.uid;
+          data.postNo = snapshot.ref.key;
+          dataToBeSent.push(data);
+        });
+        if (index === latest.length - 1) {
           res.send(dataToBeSent);
         }
       });

@@ -8,6 +8,7 @@ const UserCreate = require("./routes/UserCreate");
 const ProfilePicture = require("./routes/ProfilePicture");
 const VideoUpload = require("./routes/VideoUpload");
 const HomeFeed = require("./routes/HomeFeed");
+const LikedPost = require("./routes/LikedPosts");
 
 App.use(bodyparser.urlencoded({ extended: false }));
 App.use(express.json({ extended: false }));
@@ -18,6 +19,7 @@ App.use(UserCreate);
 App.use(ProfilePicture);
 App.use(VideoUpload);
 App.use(HomeFeed);
+App.use(LikedPost);
 
 App.listen(3001, () => {
   console.log("listening on port 3001");
