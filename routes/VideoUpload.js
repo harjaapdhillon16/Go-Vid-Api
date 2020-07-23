@@ -97,7 +97,7 @@ VideoUpload.post("/videoUpload", (req, res) => {
         Upload(saveTo, uid, PostNo, uuid, image).then(async (url) => {
           await UsersDatabase.child(`${uid}`).once("value", (snapShot) => {
             const { username } = snapShot.val();
-            PostsDatabase.child(`${uid}/${PostNo}`).set({
+            PostsDatabase.child(`${uid}/${PostNo}__${uid}`).set({
               image: url[1],
               url: url[0],
               username,
@@ -105,6 +105,7 @@ VideoUpload.post("/videoUpload", (req, res) => {
               likes: 0,
               comments: 0,
               timeStamp: Date.now(),
+              index: PostNo,
             });
             LatestDatabase.push({
               uid: uid,
@@ -125,7 +126,7 @@ VideoUpload.post("/videoUpload", (req, res) => {
     ffmpeg()
       .input(saveTo)
       .output(image)
-      .withSize('135x240')
+      .withSize("135x240")
       .on("error", function (err) {
         SetValues();
       })

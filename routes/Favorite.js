@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 const FavoriteDatabase = admin.database().ref(`favorite`);
 const PostDatabase = admin.database().ref(`posts`);
 
-FavoritePost.post("/FavoritePost", async (req, res) => {
+FavoritePost.post("/favoritePost", async (req, res) => {
   const { uid, paginatedValue } = req.body;
   let FavoriteData = [];
   let PostsData = [];
@@ -23,7 +23,7 @@ FavoritePost.post("/FavoritePost", async (req, res) => {
       });
     });
   FavoriteData.map((item, index) => {
-    PostDatabase.child(`${item.userID}/${item.postNo}`).once(
+    PostDatabase.child(`${item.userID}/${item.postNo}__${item.userID}`).once(
       "value",
       (snap) => {
         PostsData.push(snap.val());

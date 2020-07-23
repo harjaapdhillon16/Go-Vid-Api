@@ -21,11 +21,12 @@ HomeFeed.get("/homeFeed", async (req, res) => {
   });
   latest.map(async (item, index) => {
     await db2
-      .child(`${item.uid}/${item.postNo}`)
+      .child(`${item.uid}/${item.postNo}__${item.uid}`)
       .once("value", async (snapshot) => {
         let data = snapshot.val();
         await userDb.child(`${item.uid}/uri`).once("value", (snap) => {
-          data.uri = snap.val();
+          const uri = snap.val();
+          data.uri = uri;
           data.uid = item.uid;
           data.postNo = snapshot.ref.key;
           dataToBeSent.push(data);

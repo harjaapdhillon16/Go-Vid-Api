@@ -23,7 +23,7 @@ LikedPost.post("/likedPost", async (req, res) => {
       });
     });
   LikedData.map((item, index) => {
-    PostDatabase.child(`${item.userID}/${item.postNo}`).once(
+    PostDatabase.child(`${item.userID}/${item.postNo}__${item.userID}`).once(
       "value",
       (snap) => {
         PostsData.push(snap.val());
