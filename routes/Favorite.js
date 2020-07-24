@@ -15,6 +15,9 @@ FavoritePost.post("/favoritePost", async (req, res) => {
     .startAt(paginatedValue - 6)
     .endAt(paginatedValue)
     .once("value", (snap) => {
+      if (snap.val() === null) {
+        res.send([]);
+      }
       snap.forEach((data) => {
         const DataString = data.ref.key;
         const res = DataString.split("__");
