@@ -12,6 +12,7 @@ const LikedPost = require("./routes/LikedPosts");
 const FavoritePost = require("./routes/Favorite");
 const Follow = require("./routes/Follow");
 const Followers = require("./routes/Followers");
+const Notifications = require("./routes/Notifications");
 
 App.use(bodyparser.urlencoded({ extended: false }));
 App.use(express.json({ extended: false }));
@@ -26,7 +27,9 @@ App.use(LikedPost);
 App.use(FavoritePost);
 App.use(Follow);
 App.use(Followers);
+App.use(Notifications);
+const port = process.env.PORT || 3001;
 
-App.listen(3001, () => {
+App.listen(port, () => {
   console.log("listening on port 3001");
 });
