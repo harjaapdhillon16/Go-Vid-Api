@@ -17,6 +17,7 @@ HomeFeed.get("/homeFeed", async (req, res) => {
       LatestData.uid = data.val().uid;
       LatestData.postNo = data.val().postNo;
       latest.push(LatestData);
+      latest.reverse();
     });
   });
   latest.map(async (item, index) => {
