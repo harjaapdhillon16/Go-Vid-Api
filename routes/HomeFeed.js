@@ -17,9 +17,9 @@ HomeFeed.get("/homeFeed", async (req, res) => {
       LatestData.uid = data.val().uid;
       LatestData.postNo = data.val().postNo;
       latest.push(LatestData);
-      latest.reverse();
     });
   });
+  latest.reverse();
   latest.map(async (item, index) => {
     await db2
       .child(`${item.uid}/${item.postNo}__${item.uid}`)
